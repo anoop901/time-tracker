@@ -1,7 +1,7 @@
 <div class="task" *ngFor="let task of tasks">
   <div class="task-name">{{ task.name }}</div>
   <div *ngFor="let focus of focusesForTask(task.id)">
-    [{{ durationOfFocusHumanized(focus) }}]
+    [{{ focusDurationFormatted(focus) }}]
     {{ focus.start | date: "mediumDate" }}
     {{ focus.start | date: "HH:mm" }}&ndash;{{ focus.end | date: "HH:mm" }}
   </div>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import humanizeDuration from 'humanize-duration';
+import { formatDistance } from 'date-fns';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +16,7 @@ export class AppComponent {
     {
       task: 'a',
       start: new Date('2022-01-24T13:00'),
-      end: new Date('2022-01-24T13:24'),
+      end: new Date('2022-01-24T13:24:00'),
     },
     {
       task: 'a',
@@ -34,7 +34,9 @@ export class AppComponent {
     return this.focuses.filter((focus) => focus.task === taskId);
   }
 
-  durationOfFocusHumanized(focus: { end: Date; start: Date }) {
-    return humanizeDuration(focus.end.getTime() - focus.start.getTime());
+  focusDurationFormatted(focus: { end: Date; start: Date }) {
+    return formatDistance(focus.start, focus.end, {
+      includeSeconds: true,
+    });
   }
 }
