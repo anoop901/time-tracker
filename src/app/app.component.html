@@ -1,6 +1,9 @@
-<div class="task" *ngFor="let task of tasks">
+<div class="task" *ngFor="let task of tasksToShow">
   <div class="task-name">{{ task.name }}</div>
-  <button>Start focus</button>
+  <button *ngIf="currentTaskId == null" (click)="startFocus(task)">
+    Start focus
+  </button>
+  <button *ngIf="currentTaskId != null" (click)="endFocus()">End focus</button>
   <div *ngFor="let focus of focusesForTask(task.id)">
     [{{ focusDurationFormatted(focus) }}]
     {{ focus.start | date: "mediumDate" }}
