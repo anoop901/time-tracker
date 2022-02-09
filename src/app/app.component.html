@@ -1,12 +1,24 @@
-<div class="task" *ngFor="let task of tasksToShow">
-  <div class="task-name">{{ task.name }}</div>
-  <button *ngIf="currentTaskId == null" (click)="startFocus(task)">
-    Start focus
-  </button>
-  <button *ngIf="currentTaskId != null" (click)="endFocus()">End focus</button>
-  <div *ngFor="let focus of focusesForTask(task.id)">
-    [{{ focusDurationFormatted(focus) }}]
-    {{ focus.start | date: "mediumDate" }}
-    {{ focus.start | date: "HH:mm" }}&ndash;{{ focus.end | date: "HH:mm" }}
-  </div>
-</div>
+<ng-container *ngFor="let task of tasksToShow">
+  <mat-card>
+    <mat-card-title>{{ task.name }}</mat-card-title>
+    <mat-card-content>
+      <div *ngFor="let focus of focusesForTask(task.id)">
+        [{{ focusDurationFormatted(focus) }}]
+        {{ focus.start | date: "mediumDate" }}
+        {{ focus.start | date: "HH:mm" }}&ndash;{{ focus.end | date: "HH:mm" }}
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        mat-button
+        *ngIf="currentTaskId == null"
+        (click)="startFocus(task)"
+      >
+        Start focus
+      </button>
+      <button mat-button *ngIf="currentTaskId != null" (click)="endFocus()">
+        End focus
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</ng-container>
